@@ -48,6 +48,6 @@ refresh-remote:
 	- docker-compose run php php artisan landingpage:cache
 
 remote-deploy:
-	- ssh -i C:\Users\nguye\Documents\keyvpsfree.pem ubuntu@ec2-18-139-226-191.ap-southeast-1.compute.amazonaws.com 'cd /home/toi/projects/class.tech2.vn && make update'
+	- ssh -i C:\Users\nguye\Documents\keyvpsfree.pem ubuntu@ec2-18-139-226-191.ap-southeast-1.compute.amazonaws.com 'cd /home/ubuntu/projects/Amazone-Logistics && make update'
 
 clear-cache-remote:
