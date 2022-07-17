@@ -35,9 +35,9 @@ class LoadGoodsCarRequest extends FormRequest
         return [
             'car_id.numeric' => 'Vui lòng chọn xe để xếp mặt hàng lên',
             'car_id.required' => 'Vui lòng chọn xe để xếp mặt hàng lên',
-            'goods.*.goods_id.required' => 'Vui lòng chọn mặt hàng cần xếp lên xe',
-            'goods.*.fareOfCar.required'=> 'Vui lòng nhập cước phí xe',
-            'goods.*.fareOfCar.numeric' => 'Cước phí của xe không hợp lệ',
+            'goods.goods_id.required' => 'Vui lòng chọn mặt hàng cần xếp lên xe',
+            'goods.fareOfCar.required'=> 'Vui lòng nhập cước phí xe',
+            'goods.fareOfCar.numeric' => 'Cước phí của xe không hợp lệ',
             'goods.required' => 'Vui lòng chọn mặt hàng để xếp lên xe',
             'goods.min' => 'Vui lòng chọn mặt hàng để xếp lên xe',
         ];
