@@ -55,8 +55,8 @@ class CarRentalController extends Controller
         $carRental = new CarRental();
         $carRental->fill($request->all());
         $carRental->save();
-        $message = "Nhân viên: ".auth('api')->user()->name . " đã tạo nhà xe ".
-                    $carRental->name. ", số điện thoại: ". $carRental->phoneNumber. ", loại nhà xe: ". $this->typeCarRental($request->isHome);
+        $message = "Staff: ".auth('api')->user()->name . " created garage ".
+                    $carRental->name. ", mobile number: ". $carRental->phoneNumber. ", type of garage: ". $this->typeCarRental($request->isHome);
 
         ChangeDataProcessed::dispatch($message);
         return $carRental;
@@ -94,9 +94,9 @@ class CarRentalController extends Controller
      */
     public function update(StoreCarRentalRequest $request, CarRental $carrental)
     {
-        $message = "Nhân viên: ".auth('api')->user()->name . " đã sửa nhà xe ".
-                    $carrental->name. ", số điện thoại: ". $carrental->phoneNumber. ", loại nhà xe: ". $this->typeCarRental($carrental->isHome) ." thành ".
-                    $request->name. ", số điện thoại: ". $request->phoneNumber. ", loại nhà xe: ".$this->typeCarRental($request->isHome);
+        $message = "Staff: ".auth('api')->user()->name . " updated garage ".
+                    $carrental->name. ", mobile number: ". $carrental->phoneNumber. ", type of garage: ". $this->typeCarRental($carrental->isHome) ." into ".
+                    $request->name. ", mobile number: ". $request->phoneNumber. ", type of garage: ".$this->typeCarRental($request->isHome);
 
         $carrental->fill($request->all());
         ChangeDataProcessed::dispatch($message);
@@ -116,10 +116,10 @@ class CarRentalController extends Controller
     }
     public function typeCarRental($isHome){
         if($isHome == 1){
-            return 'nhà xe của kho';
+            return 'garage of ware-house';
         }
         else{
-            return 'nhà xe ngoài';
+            return '3rd pary garage';
         }
     }
 

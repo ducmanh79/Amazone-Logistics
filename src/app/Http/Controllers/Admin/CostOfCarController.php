@@ -37,13 +37,13 @@ class CostOfCarController extends Controller
         $costOfCar->car()->associate($car->id);
         $costOfCar->user()->associate(auth('api')->user()->id);
         $costOfCar->save();
-        $message = "Nhân viên: ".auth('api')->user()->name . " đã thêm chi phí ". $request->name. " của xe biển kiểm soát ".
-                    $car->licensePlate. " ngày ".Carbon::createFromFormat('Y-m-d', $costOfCar->date)->format('d/m/Y'). " với chi phí ".$costOfCar->cost;
+        $message = "Staff: ".auth('api')->user()->name . " added cost of truck ". $request->name. " of truck with license plate ".
+                    $car->licensePlate. " date ".Carbon::createFromFormat('Y-m-d', $costOfCar->date)->format('d/m/Y'). " with fee ".$costOfCar->cost;
 
         ChangeDataProcessed::dispatch($message);
 
         return response()->json([
-            'success' => 'Cập nhật chi phí của xe thành công',
+            'success' => 'Successfully update cost of truck',
         ]);
     }
 
@@ -55,9 +55,9 @@ class CostOfCarController extends Controller
     public function update(StoreCostOfCarRequest $request, CostOfCar $costOfCar)
     {
         $this->authorize('updateCostOfCar', CostOfCar::class);
-        $message = "Nhân viên: ".auth('api')->user()->name . " đã cập nhật chi phí ". $costOfCar->name. " của xe biển kiểm soát ".
-                    $costOfCar->car->licensePlate. " ngày ".Carbon::createFromFormat('Y-m-d', $costOfCar->date)->format('d/m/Y').
-                    " với chi phí: " .$costOfCar->cost." thành chi phí : $request->name với chi phí là: ".$costOfCar->cost;
+        $message = "Staff: ".auth('api')->user()->name . " updated cost of truck ". $costOfCar->name. " of truck with license plate ".
+                    $costOfCar->car->licensePlate. " date ".Carbon::createFromFormat('Y-m-d', $costOfCar->date)->format('d/m/Y').
+                    " with fee: " .$costOfCar->cost." into : $request->name with fee of: ".$costOfCar->cost;
         $costOfCar->fill($request->all());
         $costOfCar->user()->associate(auth('api')->user()->id);
         $costOfCar->save();
@@ -65,20 +65,20 @@ class CostOfCarController extends Controller
 
         ChangeDataProcessed::dispatch($message);
         return response()->json([
-            'success' => 'Cập nhật chi phí thành công',
+            'success' => 'Successfully update cost of truck',
         ]);
     }
 
     public function delete(CostOfCar $costOfCar){
         $this->authorize('deleteCosOfCar', CostOfCar::class);
         $costOfCar->load('car');
-        $message = "Nhân viên: ".auth('api')->user()->name . " đã xóa chi phí của xe biển kiểm soát ".
-                    $costOfCar->car->licensePlate. " ngày ".Carbon::createFromFormat('Y-m-d', $costOfCar->date)->format('d/m/Y').
-                    " vói chi phí: ".$costOfCar->cost;
+        $message = "Staff: ".auth('api')->user()->name . " delted cost of truck with license plate ".
+                    $costOfCar->car->licensePlate. " date ".Carbon::createFromFormat('Y-m-d', $costOfCar->date)->format('d/m/Y').
+                    " with fee of: ".$costOfCar->cost;
         ChangeDataProcessed::dispatch($message);
         $costOfCar->delete();
         return response()->json([
-            'success' => 'Xóa chi phí thành công',
+            'success' => 'Sucessfully delete fee',
         ]);
     }
 }

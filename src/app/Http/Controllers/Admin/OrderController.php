@@ -61,9 +61,9 @@ class OrderController extends Controller
             $order->fill($request->all());
             $order->user()->associate(auth('api')->user()->id);
             $order->save();
-            $message = "Nhân viên: ".auth('api')->user()->name. " đã tạo đơn hàng cho ". $order->nameSender. ", địa chỉ: ".
-                        $order->addressSender. ", số điện thoại: ". $order->phoneSender. " gửi cho ". $order->nameReceiver. ", địa chỉ: ".
-                        $order->addressReceiver. ", số điện thoại: ". $order->phoneReceiver. " ngày ".Carbon::parse($order->created_at)->format('d/m/Y');
+            $message = "Staff: ".auth('api')->user()->name. " created order for ". $order->nameSender. ", address: ".
+                        $order->addressSender. ", mobile number: ". $order->phoneSender. " send to ". $order->nameReceiver. ", address: ".
+                        $order->addressReceiver. ", mobile number: ". $order->phoneReceiver. " date ".Carbon::parse($order->created_at)->format('d/m/Y');
 
             ChangeDataProcessed::dispatch($message);
 
@@ -121,11 +121,11 @@ class OrderController extends Controller
      */
     public function update(OrderRequest $request, Order $order)
     {
-        $message = "Nhân viên: ".auth('api')->user()->name. " cập nhật đơn hàng của ". $order->nameSender. ", địa chỉ: ".
-                        $order->addressSender. ", sdt: ". $order->phoneSender. " gửi cho ". $order->nameReceiver. ", địa chỉ: ".
-                        $order->addressReceiver. ", sđt: ". $order->phoneReceiver. " ngày ".Carbon::parse($order->created_at)->format('d/m/Y').
-                        " thành người gửi: ".$request->nameSender. ", địa chỉ: ". $request->addressSender. ", sdt: ". $request->phoneSender. " gửi cho ". $request->nameReceiver. ", địa chỉ: ".
-                        $request->addressReceiver. ",sđt: ". $request->phoneReceiver;
+        $message = "Staff: ".auth('api')->user()->name. " updated order of ". $order->nameSender. ", address: ".
+                        $order->addressSender. ", mobile number: ". $order->phoneSender. " send to ". $order->nameReceiver. ", address: ".
+                        $order->addressReceiver. ", mobile number: ". $order->phoneReceiver. " date ".Carbon::parse($order->created_at)->format('d/m/Y').
+                        " to sender: ".$request->nameSender. ", address: ". $request->addressSender. ", mobile number: ". $request->phoneSender. " send to ". $request->nameReceiver. ", address: ".
+                        $request->addressReceiver. ", mobile number: ". $request->phoneReceiver;
         $order->fill($request->all());
         $order->user()->associate(auth('api')->user()->id);
         $order->save();
@@ -145,18 +145,18 @@ class OrderController extends Controller
             $query->whereNotNull('confirmDay');
         })->find($order->id);
         if($order){
-            $message = "Nhân viên: ".auth('api')->user()->name. " đã xóa đơn hàng cho ". $order->nameSender. ", địa chỉ: ".
-                        $order->addressSender. ", sđt: ". $order->phoneSender. " gửi cho ". $order->nameReceiver. " địa chỉ: ".
-                        $order->addressReceiver. ", sđt: ". $order->phoneReceiver. " ngày ".Carbon::parse($order->created_at)->format('d/m/Y');;
+            $message = "Staff: ".auth('api')->user()->name. " delete order for ". $order->nameSender. ", address: ".
+                        $order->addressSender. ", mobile number: ". $order->phoneSender. " send to". $order->nameReceiver. " address: ".
+                        $order->addressReceiver. ", mobile number: ". $order->phoneReceiver. " date ".Carbon::parse($order->created_at)->format('d/m/Y');;
             ChangeDataProcessed::dispatch($message);
             $order->delete();
             return response()->json([
-                'success' => 'Xoá đơn hàng thành công',
+                'success' => 'Sucessfully delete order',
             ]);
         }
         else{
             return response()->json([
-                'error' => 'Không thể xóa đơn hàng này',
+                'error' => 'Unable to delete order',
             ]);
         }
     }
@@ -241,7 +241,7 @@ class OrderController extends Controller
         }
         $order->save();
         return response()->json([
-            'success' => 'Thành công',
+            'success' => 'Success',
         ]);
     }
 

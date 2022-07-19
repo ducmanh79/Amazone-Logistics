@@ -135,28 +135,28 @@ class EmployeeController extends Controller
         $user->password = Hash::make($user->phone);
         $user->save();
         return response()->json([
-            'success' => 'Reset mật khẩu thành công',
+            'success' => 'Successfully reset password',
         ]);
     }
 
     public function activeEmployee(User $user){
         if($user->role->name == "admin"){
             return response()->json([
-                'message' => 'Không thể vô hiệu hóa tài khoản này',
+                'message' => 'Unable to deactivate this account',
             ]);
         }
         if($user->isActive == true){
             $user->isActive = false;
             $user->save();
             return response()->json([
-                'message' => 'Vô hiệu hóa tài khoản thành công',
+                'message' => 'Successfully deactivate this account',
             ]);
         }
         else{
             $user->isActive = true;
             $user->save();
             return response()->json([
-                'message' => 'Hủy vô hiệu hóa tài khoản thành công',
+                'message' => 'Successfully cancel deactivate this account',
             ]);
         }
     }

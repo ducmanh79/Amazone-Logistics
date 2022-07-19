@@ -27,12 +27,12 @@ class GoodsController extends Controller
         $goods->order()->associate($order_id);
         $goods->save();
         $goods->load('order');
-        $message = $message = "Nhân viên: ".auth('api')->user()->name. " thêm mặt hàng ".$goods->name. ", số lượng: "
-                                    .$goods->quantity. " ".$goods->unit. " trong đơn hàng của ".$goods->order->nameSender. " - ".$goods->order->phoneSender
-                                    . " tạo ngày ". Carbon::parse($goods->order->created_at)->format('d/m/Y');
+        $message = $message = "Staff: ".auth('api')->user()->name. " add product ".$goods->name. ", quantity: "
+                                    .$goods->quantity. " ".$goods->unit. " in order of ".$goods->order->nameSender. " - ".$goods->order->phoneSender
+                                    . " create at ". Carbon::parse($goods->order->created_at)->format('d/m/Y');
         ChangeDataProcessed::dispatch($message);
         return response()->json([
-            'success' => 'Thêm mặt hàng vào đơn hàng thành công'
+            'success' => 'Successfully add product into order'
         ]);
     }
 
@@ -44,20 +44,20 @@ class GoodsController extends Controller
         $this->authorize('editGoods', Goods::class);
         if($goods->confirmDay==null){
             $goods->load('order');
-            $message = $message = "Nhân viên: ".auth('api')->user()->name. " sửa mặt hàng $goods->name, số lượng:
-                                    $goods->quantity $goods->unit, tiền thu hộ: $goods->collectedMoney, tiền thu khách là: $goods->fare thành $request->name, số lượng:
-                                    $request->quantity $goods->unit, tiền thu hộ: $request->collectedMoney, tiền thu khách là: $request->fare trong đơn hàng của ". $goods->order->nameSender. " số điện thoại ". $goods->order->phoneSender.
+            $message = $message = "Staff: ".auth('api')->user()->name. " update product $goods->name, quantity:
+                                    $goods->quantity $goods->unit, payment of receiver: $goods->collectedMoney, payment of customer: $goods->fare into $request->name, quantity:
+                                    $request->quantity $goods->unit, payment of receiver: $request->collectedMoney, payment of customer: $request->fare in order of ". $goods->order->nameSender. " số điện thoại ". $goods->order->phoneSender.
                                     " tạo ngày ". Carbon::parse($goods->order->created_at)->format('d/m/Y');
             $goods->fill($request->all());
             $goods->save();
             ChangeDataProcessed::dispatch($message);
             return response()->json([
-                'success' => 'Sửa mặt hàng thành công',
+                'success' => 'Successfully update this product',
             ]);
         }
         else{
             return response()->json([
-                'error' => 'Không thể sửa mặt hàng này',
+                'error' => 'Unable to update this product',
             ]);
         }
     }
@@ -66,19 +66,19 @@ class GoodsController extends Controller
         $this->authorize('editFareOfCar', Goods::class);
         if($goods->loadCarDay == null){
             return response()->json([
-                'error' => 'Không thể cập nhật chi phí mặt hàng chưa xếp lên xe',
+                'error' => 'Unable to update product which not load on any truck',
             ]);
         }
         else{
-            $message = $message = "Nhân viên: ".auth('api')->user()->name. " sửa chi phí lên xe của mặt hàng ".$goods->name. ", số lượng: "
-                                    .$goods->quantity. " ".$goods->unit. "từ ".$goods->fareOfCar. " thành ". $request->fareOfCar. " trong đơn hàng của ".$goods->order->nameSender. ", sdt người gửi là: ".$goods->order->phoneSender
-                                    . " tạo ngày ". Carbon::parse($goods->order->created_at)->format('d/m/Y');
+            $message = $message = "Staff: ".auth('api')->user()->name. " updated fare of truck ".$goods->name. ", quantity: "
+                                    .$goods->quantity. " ".$goods->unit. "from ".$goods->fareOfCar. " to ". $request->fareOfCar. " in order ".$goods->order->nameSender. ", sdt người gửi là: ".$goods->order->phoneSender
+                                    . " created at ". Carbon::parse($goods->order->created_at)->format('d/m/Y');
 
             $goods->fareOfCar = $request->fareOfCar;
             $goods->save();
             ChangeDataProcessed::dispatch($message);
             return response()->json([
-                'message' => 'Cập nhật chi phí lên xe thành công',
+                'message' => 'Successfully update fare of truck',
             ]);
         }
     }
@@ -86,18 +86,18 @@ class GoodsController extends Controller
     public function deleteGoods(Goods $goods){
         $this->authorize('delete',$goods ,Goods::class);
         if($goods->confirmDay==null){
-            $message = $message = "Nhân viên: ".auth('api')->user()->name. " xóa mặt hàng ".$goods->name. ", số lượng: "
-                                    .$goods->quantity. " ".$goods->unit. " trong đơn hàng của ".$goods->order->nameSender. ",sdt người gửi là: ".$goods->order->phoneSender
-                                    . " tạo ngày ". Carbon::parse($goods->order->created_at)->format('d/m/Y');
+            $message = $message = "Staff: ".auth('api')->user()->name. " delete product ".$goods->name. ", quantity: "
+                                    .$goods->quantity. " ".$goods->unit. " in order of ".$goods->order->nameSender. ",mobile number of sender: ".$goods->order->phoneSender
+                                    . " created at ". Carbon::parse($goods->order->created_at)->format('d/m/Y');
             $goods->delete();
             ChangeDataProcessed::dispatch($message);
             return response()->json([
-                'success' => 'Xóa mặt hàng thành công',
+                'success' => 'Successfully delete product',
             ]);
         }
         else{
             return response()->json([
-                'error' => 'Không thể xóa mặt hàng này',
+                'error' => 'Unable to delete product',
             ]);
         }
     }
@@ -119,12 +119,12 @@ class GoodsController extends Controller
         $goods->confirmDay = Carbon::now()->toDate();
         $goods->user_confirm()->associate(auth('api')->user());
         $goods->save();
-        $message = "Nhân viên: ".auth('api')->user()->name. " nhập kho mặt hàng ".$goods->name. ", số lượng: "
-                        .$goods->quantity. " ".$goods->unit. ", số điện thoại người gửi là: ". $goods->order->phoneSender. " địa chỉ: ".$goods->order->addressSender." ngày tạo đơn là: ".
+        $message = "Staff: ".auth('api')->user()->name. " confirm product ".$goods->name. ", quantity: "
+                        .$goods->quantity. " ".$goods->unit. ", mobile number of sender: ". $goods->order->phoneSender. " address: ".$goods->order->addressSender." order created date: ".
                         Carbon::parse($goods->order->created_at)->format('d/m/Y');
         ChangeDataProcessed::dispatch($message);
         return response()->json([
-            'success' => 'Xác nhận mặt hàng thành công',
+            'success' => 'Successfully confirm product',
         ]);
     }
 
@@ -133,12 +133,12 @@ class GoodsController extends Controller
         $goods->confirmDay = null;
         $goods->user_confirm()->dissociate();
         $goods->save();
-        $message = "Nhân viên: ".auth('api')->user()->name. " hủy kho mặt hàng ".$goods->name. ", số lượng: "
-                        .$goods->quantity. " ".$goods->unit. ", số điện thoại người gửi là: ". $goods->order->phoneSender. " ngày tạo đơn là: ".
+        $message = "Staff: ".auth('api')->user()->name. " remove product from storage ".$goods->name. ", quantity: "
+                        .$goods->quantity. " ".$goods->unit. ", sender mobile number: ". $goods->order->phoneSender. " order created date: ".
                         Carbon::parse($goods->order->created_at)->format('d/m/Y');
         ChangeDataProcessed::dispatch($message);
         return response()->json([
-            'success' => 'Hủy xác nhận mặt hàng thành công',
+            'success' => 'Successfully remove product from storage',
         ]);
     }
 
@@ -164,20 +164,20 @@ class GoodsController extends Controller
                 'user_load_car_id' => auth('api')->user()->id,
             ]);
             $goods = Goods::with('car')->find($goodsRequest['goods_id']);
-            $message = "Nhân viên: ".auth('api')->user()->name. " xếp lên xe: ".$goods->car->licensePlate." mặt hàng ".$goods->name. ", số lượng: "
-                        .$goods->quantity. " ".$goods->unit. ", số điện thoại người gửi là: ". $goods->order->phoneSender. " ngày tạo đơn là: ".
+            $message = "Staff: ".auth('api')->user()->name. " load product on truck: ".$goods->car->licensePlate." product ".$goods->name. ", quantity: "
+                        .$goods->quantity. " ".$goods->unit. ", sender mobile number: ". $goods->order->phoneSender. " order created date: ".
                         Carbon::parse($goods->order->created_at)->format('d/m/Y');
             ChangeDataProcessed::dispatch($message);
         }
         return response()->json([
-            'success' => 'Xếp hàng lên xe thành công',
+            'success' => 'Successfully load product on truck',
         ]);
     }
 
     public function cancelLoadGoodsOnTheCar(Goods $goods){
         $this->authorize('cancelLoadGoodsCar', Goods::class);
-        $message = "Nhân viên: ".auth('api')->user()->name. " đã hủy mặt hàng ".$goods->name. ", số lượng: "
-                        .$goods->quantity. " ".$goods->unit. " trên xe ".$goods->car->licensePlate. ", số điện thoại người gửi là: ". $goods->order->phoneSender. " ngày tạo đơn là: ".
+        $message = "Staff: ".auth('api')->user()->name. " canceled load product on truck ".$goods->name. ", quantity: "
+                        .$goods->quantity. " ".$goods->unit. " on truck ".$goods->car->licensePlate. ", sender mobile number: ". $goods->order->phoneSender. " order created date: ".
                         Carbon::parse($goods->order->created_at)->format('d/m/Y');
         ChangeDataProcessed::dispatch($message);
         $goods->car_id = null;
@@ -186,7 +186,7 @@ class GoodsController extends Controller
         $goods->user_load_car_id = null;
         $goods->save();
         return response()->json([
-            'success' => 'Hủy xếp hàng lên xe thành công',
+            'success' => 'Successfully unload product on truck',
         ]);
     }
 
@@ -252,12 +252,12 @@ class GoodsController extends Controller
         $goods->confirmCarPayWareHouseDay = Carbon::now()->toDate();
         $goods->save();
         $goods->load('order');
-        $message = "Nhân viên: ".auth('api')->user()->name. "nhận tiền thu hộ của mặt hàng: ".$goods->name." ".$goods->unit. "của người gửi: ".
-                        $goods->order->nameSender." - ".$goods->order->phoneSender. " số tiền: ".$goods->collectedMoney. ", số điện thoại người gửi là: ". $goods->order->phoneSender. " ngày tạo đơn là: ".
+        $message = "Staff: ".auth('api')->user()->name. "received payment of receiver for: ".$goods->name." ".$goods->unit. "of sender: ".
+                        $goods->order->nameSender." - ".$goods->order->phoneSender. " amount: ".$goods->collectedMoney. ", sender mobile number: ". $goods->order->phoneSender. " order created date: ".
                         Carbon::parse($goods->order->created_at)->format('d/m/Y');
         ChangeDataProcessed::dispatch($message);
         return response()->json([
-            'success' => 'Xác nhận thu phí thu hộ cho đơn hàng thành công',
+            'success' => 'Successfully receive payment of receiver for this product',
         ]);
     }
     public function cancelConfirmCollectedMoneyFromCar(Goods $goods){
@@ -265,12 +265,12 @@ class GoodsController extends Controller
         $goods->confirmCarPayWareHouseDay = null;
         $goods->save();
         $goods->load('order');
-        $message = "Nhân viên: ".auth('api')->user()->name. "hủy nhận tiền thu hộ của mặt hàng: ".$goods->name." ".$goods->unit. "của người gửi: ".
-                        $goods->order->nameSender." - ".$goods->order->phoneSender. " số tiền: ".$goods->collectedMoney. ", số điện thoại người gửi là: ". $goods->order->phoneSender. " ngày tạo đơn là: ".
+        $message = "Staff: ".auth('api')->user()->name. "cancel receiving payment of receiver: ".$goods->name." ".$goods->unit. "of sender: ".
+                        $goods->order->nameSender." - ".$goods->order->phoneSender. " amount: ".$goods->collectedMoney. ", sender mobile number: ". $goods->order->phoneSender. " order created at: ".
                         Carbon::parse($goods->order->created_at)->format('d/m/Y');
         ChangeDataProcessed::dispatch($message);
         return response()->json([
-            'success' => 'Hủy xác nhận thu phí thu hộ cho đơn hàng thành công',
+            'success' => 'Successfully cancel receive payment of receiver',
         ]);
     }
 }

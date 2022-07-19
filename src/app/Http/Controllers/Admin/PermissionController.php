@@ -44,7 +44,7 @@ class PermissionController extends Controller
         }
         $employee->tokens()->delete();
         return response()->json([
-            'success' => 'Thành công',
+            'success' => 'Success',
         ]);
     }
 }

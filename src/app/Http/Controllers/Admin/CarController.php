@@ -53,8 +53,8 @@ class CarController extends Controller
         $car->fill($request->all());
         $car->carrental()->associate($request->carrental_id);
         $car->save();
-        $message = "Nhân viên: ".auth('api')->user()->name . " đã thêm xe biển số: ".
-                    $car->licensePlate. ", số điện thoại: ". $car->phoneNumber. ", lộ trình: ". $car->route. " ở nhà xe: ". $car->carrental->name;
+        $message = "Staff: ".auth('api')->user()->name . " Added license plate: ".
+                    $car->licensePlate. ", Mobile number: ". $car->phoneNumber. ", Route: ". $car->route. " From garage: ". $car->carrental->name;
 
         ChangeDataProcessed::dispatch($message);
         return $car;
@@ -91,9 +91,9 @@ class CarController extends Controller
      */
     public function update(UpdateCarRequest $request, Car $car)
     {
-        $message = "Nhân viên: ".auth('api')->user()->name . " đã sửa xe biển số: ".
-                    $car->licensePlate. ", số điện thoại: ". $car->phoneNumber. ", lộ trình: ". $car->route. " thành ".$request->licensePlate.
-                    ", số điện thoại: ". $request->phoneNumber. ", lộ trình: ". $request->route. " ở nhà xe: ". $car->carrental->name;
+        $message = "Staff: ".auth('api')->user()->name . " Updated license plate: ".
+                    $car->licensePlate. ", Mobile number: ". $car->phoneNumber. ", Route: ". $car->route. " into ".$request->licensePlate.
+                    ", Mobile number: ". $request->phoneNumber. ", Route: ". $request->route. " From garage: ". $car->carrental->name;
 
         $car->fill($request->all());
         ChangeDataProcessed::dispatch($message);
