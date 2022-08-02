@@ -33,13 +33,13 @@ class LoadGoodsCarRequest extends FormRequest
 
     public function messages(){
         return [
-            'car_id.numeric' => 'Vui lòng chọn xe để xếp mặt hàng lên',
-            'car_id.required' => 'Vui lòng chọn xe để xếp mặt hàng lên',
-            'goods.goods_id.required' => 'Vui lòng chọn mặt hàng cần xếp lên xe',
-            'goods.fareOfCar.required'=> 'Vui lòng nhập cước phí xe',
-            'goods.fareOfCar.numeric' => 'Cước phí của xe không hợp lệ',
-            'goods.required' => 'Vui lòng chọn mặt hàng để xếp lên xe',
-            'goods.min' => 'Vui lòng chọn mặt hàng để xếp lên xe',
+            'car_id.numeric' => 'Please select truck to load product',
+            'car_id.required' => 'Please select truck to load product',
+            'goods.goods_id.required' => 'Please select products to load on truck',
+            'goods.fareOfCar.required'=> 'Please enter fare of truck',
+            'goods.fareOfCar.numeric' => 'Invalid fare',
+            'goods.required' => 'Please select products to load on truck',
+            'goods.min' => 'Please select products to load on truck',
         ];
     }
 }

@@ -27,10 +27,9 @@ class ConfirmCarPayWareHouse extends FormRequest
             'goods_id' => 'required',
         ];
     }
-
     public function messages(){
         return [
-            'goods_id.required' => 'Vui lòng chọn mặt hàng cần nhận tiền thu hộ từ tài xế',
+            'goods_id.required' => 'Please choose product which need to be paid by receiver',
         ];
     }
 }

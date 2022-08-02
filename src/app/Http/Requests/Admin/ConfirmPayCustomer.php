@@ -30,7 +30,7 @@ class ConfirmPayCustomer extends FormRequest
 
     public function messages(){
         return ([
-            'order_id.required' => 'Vui lòng chọn đơn hàng cần xác nhận thanh toán cho khách hàng',
+            'order_id.required' => 'Please choose order which need to be confirm payment for customer',
         ]);
     }
 }

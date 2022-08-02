@@ -32,11 +32,11 @@ class StoreCostOfCarRequest extends FormRequest
 
     public function messages(){
         return [
-            'name.required' => 'Vui lòng nhập tên chi phí',
-            'date.required' => 'Vui lòng chọn ngày nhập chi phí',
-            'date.before' => 'Không nhập ngày quá hôm nay',
-            'cost.required' => 'Vui lòng nhập chi phí',
-            'cost.numeric' => 'Chi phí không hợp lệ',
+            'name.required' => 'Please enter name of cost',
+            'date.required' => 'Please enter date created cost',
+            'date.before' => 'The date should not be later than today',
+            'cost.required' => 'Please enter cost',
+            'cost.numeric' => 'Invalid cost',
         ];
     }
 }

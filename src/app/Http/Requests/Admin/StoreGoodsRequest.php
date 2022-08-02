@@ -34,14 +34,14 @@ class StoreGoodsRequest extends FormRequest
 
     public function messages(){
         return [
-            'name.required' => 'Vui lòng nhập tên mặt hàng',
-            'quantity.required' => 'Vui lòng nhập só lượng mặt hàng',
-            'unit.required' => 'Vui lòng nhập đơn vị cho mặt hàng',
-            'fare.required' => 'Vui lòng nhập chi phí cho mặt hàng',
-            'collectedMoney.required' => 'Vui lòng nhập tiền thu hộ',
-            'collectedMoney.numeric' => 'Tiền thu hộ phải là số',
-            'fare.numeric' => 'Chi phí phải là số',
-            'quantity.numeric' => 'Số lượng phải là số',
+            'name.required' => 'Please enter product name',
+            'quantity.required' => 'Please enter product quantity',
+            'unit.required' => 'Please enter product unit',
+            'fare.required' => 'Please enter product shipment fare',
+            'collectedMoney.required' => 'Please enter payment of receiver for this product',
+            'collectedMoney.numeric' => 'Payment of receiver must be number',
+            'fare.numeric' => 'Shipment fare must be number',
+            'quantity.numeric' => 'Quantity must be number',
         ];
     }
 }

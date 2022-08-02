@@ -39,18 +39,18 @@ class OrderRequest extends FormRequest
 
     public function messages(){
         return [
-            'nameSender.required' => 'Vui lòng nhập tên người gửi',
-            'addressSender.required' => 'Vui lòng nhập địa chỉ người gửi',
-            'phoneSender.required' => 'Vui lòng nhập số điện thoại người gửi',
-            'nameReceiver.required' => 'Vui lòng nhập tên người nhận',
-            'addressReceiver.required' => 'Vui lòng nhập địa chỉ người nhận',
-            'phoneReceiver.required' => 'Vui lòng nhập số điện thoại người nhận',
-            'goods.*.name.required' => 'Vui lòng nhập tên mặt hàng',
-            'goods.*.quantity.required' => 'Vui lòng nhập só lượng cho mặt hàng',
-            'goods.*.quantity.numeric' => 'Số lượng phải là số',
-            'goods.*.unit.required' => 'Vui lòng nhập đơn vị cho mặt hàng',
-            'goods.*.fare.required' => 'Vui lòng nhập cuớc phí cho mặt hàng',
-            'goods.*.fare.numeric' => 'Cước phí mặt hàng phải là số',
+            'nameSender.required' => 'Please enter sender name',
+            'addressSender.required' => 'Please enter sender address',
+            'phoneSender.required' => 'Please enter sender mobile number',
+            'nameReceiver.required' => 'Please enter receiver name',
+            'addressReceiver.required' => 'Please enter receiver address',
+            'phoneReceiver.required' => 'Please enter receiver mobile number',
+            'goods.*.name.required' => 'Please enter product name',
+            'goods.*.quantity.required' => 'Please enter product quantity',
+            'goods.*.quantity.numeric' => 'Quantity must be numeric',
+            'goods.*.unit.required' => 'Please enter product unit',
+            'goods.*.fare.required' => 'Please enter shipment fare of this product',
+            'goods.*.fare.numeric' => 'Shipment fare must be a number',
         ];
     }
 }

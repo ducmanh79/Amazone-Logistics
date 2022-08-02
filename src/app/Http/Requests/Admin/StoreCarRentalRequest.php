@@ -33,10 +33,10 @@ class StoreCarRentalRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required' => 'Vui lòng nhập tên nhà xe',
-            'name.string' => 'Tên nhà xe không hợp lệ',
-            'phoneNumber.required' => "Vui lòng nhập số điện thoại",
-            'isHome.required' => 'Vui lòng chọn loại nhà xe',
+            'name.required' => 'Please enter garage name',
+            'name.string' => 'Invalid garage name',
+            'phoneNumber.required' => "Please enter garage mobile number",
+            'isHome.required' => 'Please select type of garage',
         ];
     }
 }

@@ -31,9 +31,9 @@ class StoreCarRequest extends FormRequest
 
     public function messages(){
         return [
-            'licensePlate.required' => 'Vui lòng nhập biển số xe',
-            'licensePlate.unique' => 'Xe này đã tồn tại',
-            'phoneNumber.required' => 'vui lòng nhập số điện thoại của xe',
+            'licensePlate.required' => 'Please enter license plate id',
+            'licensePlate.unique' => 'This truck already exits',
+            'phoneNumber.required' => 'Please enter truck mobile number',
         ];
     }
 }

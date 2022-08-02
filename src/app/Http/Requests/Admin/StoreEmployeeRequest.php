@@ -35,14 +35,14 @@ class StoreEmployeeRequest extends FormRequest
 
     public function messages(){
         return [
-            'phone.unique' => 'Số điện thoại đã tồn tại',
-            'phone.required' => 'vui lòng nhập số điện thoại',
-            'name.required' => 'vui lòng nhập tên nhân viên',
-            'salary.required' => 'Vui lòng nhập lương cho nhân viên',
-            'salary.numeric' => 'Lương không hợp lệ',
-            'idNumber.required' => 'Vui lòng nhập số chứng minh thư nhân dân',
-            'address.required' => 'Vui lòng nhập địa chỉ cho nhân viên',
-            'role_id.required' => 'Vui lòng chọn vị trí của nhân viên',
+            'phone.unique' => 'Mobile number already exits',
+            'phone.required' => 'Please enter mobile number',
+            'name.required' => 'Please enter employee name',
+            'salary.required' => 'Please enter employee salary',
+            'salary.numeric' => 'Invalid salary',
+            'idNumber.required' => 'Please enter employee id number',
+            'address.required' => 'Please enter employee address',
+            'role_id.required' => 'Please enter employee position',
 
         ];
     }

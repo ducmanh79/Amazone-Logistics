@@ -31,10 +31,10 @@ class StatOrderRequest extends FormRequest
 
     public function messages(){
         return [
-            'start_day.required' => 'Vui lòng chọn ngày bắt đầu',
-            'start_day.date' => 'Ngày bắt đầu không đúng định dạng',
-            'end_day.required' => 'Vui lòng chọn ngày kết thúc',
-            'end_day.date' => 'Ngày kết thúc không đúng định dạng',
+            'start_day.required' => 'Please select start date',
+            'start_day.date' => 'Invalid form of start date',
+            'end_day.required' => 'Please select end date',
+            'end_day.date' => 'Invalid form of end date',
         ];
     }
 }

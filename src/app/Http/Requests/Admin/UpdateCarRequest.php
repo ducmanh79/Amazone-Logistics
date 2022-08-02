@@ -34,9 +34,9 @@ class UpdateCarRequest extends FormRequest
     public function rules()
     {
         return [
-            'licensePlate.required' => 'Vui lòng nhập biển số xe',
-            'licensePlate.unique' => 'Xe này đã tồn tại',
-            'phoneNumber.required' => 'vui lòng nhập số điện thoại của xe',
+            'licensePlate.required' => 'Please enter license plate',
+            'licensePlate.unique' => 'Truck already exists',
+            'phoneNumber.required' => 'Please enter truck mobile number',
         ];
     }
 }

@@ -30,8 +30,8 @@ class UpdateFareOfCarRequest extends FormRequest
 
     public function messages(){
         return [
-            'fareOfCar.required' => 'Vui lòng nhập chi phí lên xe cho mặt hàng',
-            'fareOfCar.numeric' => 'Chi phí lên xe phải là số',
+            'fareOfCar.required' => 'Please enter fare of car for this product',
+            'fareOfCar.numeric' => 'Fare of car must be number',
         ];
     }
 }
