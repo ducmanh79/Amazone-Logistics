@@ -40,6 +40,6 @@ class ActiveUser implements Rule
      */
     public function message()
     {
-        return 'Nhân viên này không được phép đăng nhập vào hệ thống';
+        return 'This employee do not have permission to log in';
     }
 }

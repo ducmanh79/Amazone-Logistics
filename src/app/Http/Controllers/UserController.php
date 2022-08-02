@@ -15,7 +15,7 @@ class UserController extends Controller
             'password' => $new_password,
         ]);
         return response()->json([
-            'success' => 'Thay đổi mật khảu thành công',
+            'success' => 'Successfully change password',
         ]);
     }
 }
